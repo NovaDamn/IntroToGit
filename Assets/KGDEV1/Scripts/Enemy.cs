@@ -7,6 +7,8 @@ public class Enemy : MonoBehaviour, IDamagable
     const float ENEMY_SPEED = 5f;
     const int ENEMY_HEALTH = 100;
 
+    public System.Action<GameObject> onDeath;
+
     private GameObject playerInstance;
     private int health;
 
@@ -31,6 +33,8 @@ public class Enemy : MonoBehaviour, IDamagable
 
         if (health <= 0)
         {
+            onDeath?.Invoke(gameObject);
+
             Destroy(gameObject);
         }
     }
